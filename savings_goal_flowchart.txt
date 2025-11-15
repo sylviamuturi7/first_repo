@@ -1,0 +1,127 @@
+SAVINGS GOAL TRACKING SYSTEM - FLOWCHART
+
+START
+  |
+  v
+[Initialize System]
+  |
+  v
+[Load Existing Goals]
+  |
+  v
+<User Action?>
+  |
+  +-- Create Goal --> [Input: User ID, Goal Name, Target Amount, Target Date]
+  |                     |
+  |                     v
+  |                   [Generate Goal ID]
+  |                     |
+  |                     v
+  |                   [Store Goal in Database]
+  |                     |
+  |                     v
+  |                   [Return Success Message]
+  |                     |
+  |                     v
+  |                   [Back to Main Menu]
+  |
+  +-- Update Progress --> [Input: Goal ID, Additional Amount]
+  |                        |
+  |                        v
+  |                      <Goal Exists?>
+  |                        |
+  |                        +-- No --> [Display Error]
+  |                        |            |
+  |                        |            v
+  |                        |          [Back to Main Menu]
+  |                        |
+  |                        +-- Yes --> [Add Amount to Current Savings]
+  |                                     |
+  |                                     v
+  |                                   <Amount >= Target?>
+  |                                     |
+  |                                     +-- Yes --> [Mark Goal as Completed]
+  |                                     |             |
+  |                                     |             v
+  |                                     |           [Send Completion Notification]
+  |                                     |             |
+  |                                     |             v
+  |                                     |           [Back to Main Menu]
+  |                                     |
+  |                                     +-- No --> [Update Progress]
+  |                                                 |
+  |                                                 v
+  |                                               [Back to Main Menu]
+  |
+  +-- Check Status --> [Input: Goal ID]
+  |                     |
+  |                     v
+  |                   <Goal Exists?>
+  |                     |
+  |                     +-- No --> [Display Error]
+  |                     |            |
+  |                     |            v
+  |                     |          [Back to Main Menu]
+  |                     |
+  |                     +-- Yes --> [Calculate Progress Percentage]
+  |                                  |
+  |                                  v
+  |                                [Calculate Days Remaining]
+  |                                  |
+  |                                  v
+  |                                <Goal Status?>
+  |                                  |
+  |                                  +-- Completed --> [Display Success Message]
+  |                                  |
+  |                                  +-- Overdue --> [Display Overdue Warning]
+  |                                  |
+  |                                  +-- At Risk --> [Display Risk Warning]
+  |                                  |
+  |                                  +-- On Track --> [Display Progress Info]
+  |                                  |
+  |                                  v
+  |                                [Back to Main Menu]
+  |
+  +-- View Goals --> [Input: User ID]
+                      |
+                      v
+                    [Retrieve All User Goals]
+                      |
+                      v
+                    [Display Goals List]
+                      |
+                      v
+                    [Back to Main Menu]
+
+[Background Process - Notification System]
+  |
+  v
+[Check All Active Goals Daily]
+  |
+  v
+<For Each Goal>
+  |
+  v
+[Calculate Days Remaining]
+  |
+  v
+<Days <= 7 AND Progress < 100%?>
+  |
+  +-- No --> [Continue to Next Goal]
+  |
+  +-- Yes --> [Compose Warning Message]
+               |
+               v
+             [Send Push Notification]
+               |
+               v
+             [Log Notification]
+               |
+               v
+             [Continue to Next Goal]
+
+LEGEND:
+[Process/Action]
+<Decision Diamond>
+START/END (Oval)
+--> Flow Direction
